@@ -43,34 +43,25 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = arg.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            if len(arg) > 1:
+                my_dict = dict(element.split('=') for element in my_list[1:])
+                for key, value in my_dict.items():
+                    if hasattr(obj, key):
+                        if value[0] == "\"" and value[-1] == "\"":
+                            value = value[1:-1]
+                        if '_' in value:
+                            value = value.replace('_', ' ')
+                        try:
+                            value = eval(value)
+                        except Exception:
+                            pass
+                        setattr(obj, key, value)
+            obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-        for i in range(1, len(my_list)):
-            flag = 0
-            par_list = my_list[i].split("=")
-            if len(par_list) == 2:
-                if (type(par_list[1]) is not float and
-                        type(par_list[1]) is not int):
-                    if par_list[1][0] == "\"" and par_list[1][-1] == "\"":
-                        par_list[1] = par_list[1][1:-1]
-                        for index, char in enumerate(par_list[1]):
-                            if (par_list[1][index] == "\"" and
-                                    par_list[1][index - 1] != "\\"):
-                                flag = 1
-                                break
-                        else:
-                            print("hi")
-                            flag = 1
-            if flag == 0:
-                try:
-                    obj.__dict__[par_list[0]] = eval(par_list[1])
-                except Exception:
-                    obj.__dict__[par_list[0]] = (par_list[1])
-
-        obj.save()
 
     def do_show(self, line):
         """Prints the string representation of an instance

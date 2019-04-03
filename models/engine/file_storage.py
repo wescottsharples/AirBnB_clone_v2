@@ -25,7 +25,16 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        return self.__objects
+        my_dict = {}
+        if cls:
+            if isinstance(cls, str) is False:
+                cls = cls.__name__
+            for k, v in self.__objects.items():
+                if cls == k.split(".")[0]:
+                    my_dict[k] = v
+            return my_dict
+        else:
+            return self.__objects
 
     def new(self, obj):
         """sets __object to given obj
@@ -62,3 +71,4 @@ class FileStorage:
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             del self.__objects[key]
+            self.save()

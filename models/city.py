@@ -13,7 +13,6 @@ class City(BaseModel, Base):
         name: input name
     """
     __tablename__ = "cities"
-
     if os.getenv("HBNB_ENV") == "db":
         name = Column(String(128), nullable=False)
         state_id = Column(String(60), ForeignKey("states.id"), nullable=False)

@@ -18,7 +18,10 @@ class State(BaseModel, Base):
         cities = relationship("City", backref="state", cascade="all, delete-orphan")
     else:
         name = ""
-
         @property
         def cities(self):
-            return [ city for city in models.storage.all("City").values() if city.state_id == self.id ]
+            my_list = []
+            for city in models.storage.all("City").values():
+                if city.state_id == self.id:
+                    my_list.append(city)
+            return my_list

@@ -27,6 +27,10 @@ class FileStorage:
         """
         if cls:
             my_dict = {}
+        my_dict = {}
+        if cls:
+            if isinstance(cls, str) is False:
+                cls = cls.__name__
             for k, v in self.__objects.items():
                 if cls == k.split('.')[0]:
                     my_dict[k] = v

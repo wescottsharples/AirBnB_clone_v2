@@ -25,8 +25,6 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        if cls:
-            my_dict = {}
         my_dict = {}
         if cls:
             if isinstance(cls, str) is False:

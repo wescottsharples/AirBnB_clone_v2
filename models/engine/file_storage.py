@@ -25,7 +25,10 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
-        return self.__objects
+        if cls:
+            return {obj: key for obj, key in self.__objects.items() if type(key) == cls}
+        else:
+            return self.__objects
 
     def new(self, obj):
         """sets __object to given obj

@@ -25,6 +25,7 @@ class FileStorage:
         Return:
             returns a dictionary of __object
         """
+<<<<<<< HEAD
         my_dict = {}
         if cls:
             if isinstance(cls, str) is False:
@@ -33,6 +34,10 @@ class FileStorage:
                 if cls == k.split(".")[0]:
                     my_dict[k] = v
             return my_dict
+=======
+        if cls:
+            return {obj: key for obj, key in self.__objects.items() if type(key) == cls}
+>>>>>>> 0c2ed70e9dcafc86210fa596acf11459c8bb8ede
         else:
             return self.__objects
 

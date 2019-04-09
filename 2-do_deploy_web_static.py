@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """contains do_pack and do_deploy functions"""
-from fabric.api import *
+from fabric.api import env, run, local
 
 env.hosts = ["34.73.145.109", "35.196.46.86"]
-env.user = "ubuntu"
-env.key_filename = "~/.ssh/id_rsa"
 
 
 def do_pack():

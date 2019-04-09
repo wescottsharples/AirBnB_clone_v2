@@ -7,17 +7,17 @@
 
 import os
 from datetime import datetime
-from fabric.api import *
+from fabric.api import local
 
 
 def do_pack():
     """generates an .tgz archive from web_static folder"""
 
+    name = "web_static_" + datetime.now().strftime("%Y%m%d%H%M%S") + ".tgz"
     try:
-        name = "web_static_" + datetime.utcnow().strftime("%Y%m%d%H%M%s") + ".tgz"
         local("mkdir -p versions")
         path = "versions/{}".format(name)
-        local("tar -cfvz {} web_static".format(path))
+        local("tar -cvzf {} web_static".format(path))
         return path
     except:
         return None

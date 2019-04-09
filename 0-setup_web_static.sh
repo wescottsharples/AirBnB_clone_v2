@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 # Bash script sets u pweb servers for deployment.
 
-#sudo apt-get -y update
-#sudo apt-get -y install nginx
+FILE=/etc/nginx/sites-available/default
+REDIRECT="location /hbnb_static {\n alias /data/web_static/current; \n}\n"
 
-mkdir -p "/data/web_static/releases/test/"
-mkdir -p "/data/web_static/shared/"
-echo "<h1>Wassup</h1>" > "/data/web_static/releases/test/index.html"
-ln -sf "/data/web_static/current" "/data/web_static/releases/test/"
-chown -R ubuntu:ubuntu /data/
+sudo apt-get -y update
+sudo apt-get -y install nginx
+
+sudo mkdir -p /data/web_static/releases/test/
+sudo mkdir -p /data/web_static/shared/
+echo "<h1>Wassup</h1>" | sudo tee /data/web_static/releases/test/index.html
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo chown -R ubuntu:ubuntu /data/
+
+sudo sed -i "35i $REDIRECT" $FILE
+sudo service nginx restart

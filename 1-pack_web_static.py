@@ -5,7 +5,6 @@
     do_pack.
 """
 
-import os
 from datetime import datetime
 from fabric.api import local
 

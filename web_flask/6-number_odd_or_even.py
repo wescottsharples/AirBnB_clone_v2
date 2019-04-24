@@ -36,9 +36,9 @@ def html_if_number(n):
     return render_template('5-number.html', n=n)
 
 
-@app.route('/number_template/<int:n>')
+@app.route('/number_odd_or_even/<int:n>')
 def html_parity(n):
-    parity = "even" if n % 2 == 0 else "odd"
+    parity = "even" if (n % 2 == 0) else "odd"
     return render_template('6-number_odd_or_even.html', n=n, parity=parity)
 
 

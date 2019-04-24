@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Creates and runs a Flask web app"""
-from flask import Flask
+from flask import Flask, render_template
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
@@ -33,8 +33,7 @@ def is_number(n):
 
 @app.route('/number_template/<int:n>')
 def html_if_number(n):
-    return "<body><h1>Number: {:d}</h1></body>".format(n)
-
+    return render_template('5-number.html', n=n)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

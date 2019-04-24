@@ -26,7 +26,7 @@ def py_text(text="is cool"):
     return "Python {}".format(text.replace('_', ' '))
 
 
-@app.route('/n/<int:n>')
+@app.route('/number/<int:n>')
 def is_number(n):
     return "{:d} is a number".format(n)
 
